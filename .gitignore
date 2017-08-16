@@ -1,0 +1,7 @@
+# gitignore for LINEBlogScraper
+
+*.json
+*.html
+.python-version
+
+__pycache__/
