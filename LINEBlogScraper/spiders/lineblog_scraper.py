@@ -15,6 +15,7 @@ class LineblogScraperBaseSpider(scrapy.Spider):
         'article_datetime': 'article p.article-date time::attr("datetime")',
         'article_body': 'article div.article-body ::text',
         'article_tag': 'article dl.article-tags dd ::text',
+        'image_urls': 'article a img::attr("src")',
         'next_page': 'div.pager li.paging-next a::attr("href")',
     }
 
@@ -36,6 +37,7 @@ class LineblogScraperBaseSpider(scrapy.Spider):
         item['article_datetime'] = response.css(self.elements['article_datetime']).extract_first()
         item['article_body'] = response.css(self.elements['article_body']).extract()
         item['article_tag'] = response.css(self.elements['article_tag']).extract()
+        item['image_urls'] = response.css(self.elements['image_urls']).extract()
 
         yield item
 
