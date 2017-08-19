@@ -68,10 +68,15 @@ DOWNLOAD_DELAY = 1
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
+IMAGES_STORE = 'images'
+IMAGES_MIN_HEIGHT = 70
+IMAGES_MIN_WIDTH = 70
+
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'LINEBlogScraper.pipelines.LineblogscraperPipeline': 300,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
     'LINEBlogScraper.pipelines.ValidationPipeline': 300,
     'LINEBlogScraper.pipelines.FormatArticleBody': 400,
     'LINEBlogScraper.pipelines.FormatArticleTitle': 410,

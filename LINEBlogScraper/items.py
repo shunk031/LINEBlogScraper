@@ -15,3 +15,6 @@ class LineblogscraperItem(scrapy.Item):
     article_datetime = scrapy.Field()
     article_body = scrapy.Field()
     article_tag = scrapy.Field()
+
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
