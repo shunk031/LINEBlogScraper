@@ -10,6 +10,7 @@ import scrapy
 
 class LineblogscraperItem(scrapy.Item):
 
+    author = scrapy.Field()
     article_url = scrapy.Field()
     article_title = scrapy.Field()
     article_datetime = scrapy.Field()

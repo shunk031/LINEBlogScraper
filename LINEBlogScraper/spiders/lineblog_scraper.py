@@ -32,6 +32,7 @@ class LineblogScraperBaseSpider(scrapy.Spider):
     def parse_articles(self, response):
 
         item = LineblogscraperItem()
+        item['author'] = self.author
         item['article_url'] = response.url
         item['article_title'] = response.css(self.elements['article_title']).extract_first()
         item['article_datetime'] = response.css(self.elements['article_datetime']).extract_first()
@@ -48,4 +49,15 @@ class LineblogScraperSpider(LineblogScraperBaseSpider):
     def __init__(self, *args, **kwargs):
         super(LineblogScraperSpider, self).__init__(*args, **kwargs)
 
-        self.start_urls = [kwargs.get('start_url')]
+        url = kwargs.get('start_url')
+
+        self.author = self.get_author_from_url(url)
+        self.start_urls = [url]
+
+    def get_author_from_url(self, url):
+
+        url = url.split('/')
+        while url.count('') > 0:
+            url.remove('')
+
+        return url[-1]

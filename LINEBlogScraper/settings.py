@@ -76,7 +76,7 @@ IMAGES_MIN_WIDTH = 70
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'LINEBlogScraper.pipelines.LineblogscraperPipeline': 300,
-    'scrapy.pipelines.images.ImagesPipeline': 1,
+    'LINEBlogScraper.pipelines.LineBlogImagesPipeline': 1,
     'LINEBlogScraper.pipelines.ValidationPipeline': 300,
     'LINEBlogScraper.pipelines.FormatArticleBody': 400,
     'LINEBlogScraper.pipelines.FormatArticleTitle': 410,
