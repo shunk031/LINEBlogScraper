@@ -30,7 +30,7 @@ class ValidationPipeline(object):
 
         for key in self.ITEM.fields.keys():
 
-            if key == 'article_tag':
+            if key in ['article_tag', 'image_urls', 'images']:
                 continue
 
             if not item[key]:
