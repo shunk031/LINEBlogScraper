@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+
 import hashlib
+from datetime import datetime
 
 from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
@@ -83,7 +85,13 @@ class FormatArticleTitle(object):
 class LineBlogImagesPipeline(ImagesPipeline):
 
     def get_media_requests(self, item, info):
-        return [Request(x, meta={'author': item['author']})
+
+        tdatetime = datetime.strptime(item['article_datetime'],
+                                      '%Y-%m-%dT%H:%M:%S%z')
+        date = tdatetime.strftime('%Y-%m-%d')
+
+        return [Request(x, meta={'author': item['author'],
+                                 'date': date})
                 for x in item.get(self.images_urls_field, [])]
 
     def file_path(self, request, response=None, info=None):
@@ -112,6 +120,7 @@ class LineBlogImagesPipeline(ImagesPipeline):
         # end of deprecation warning block
 
         author = request.meta['author']
+        date = request.meta['date']
 
         image_guid = hashlib.sha1(to_bytes(url)).hexdigest()  # change to request.url after deprecation
-        return 'full/%s/%s.jpg' % (author, image_guid)
+        return 'full/%s/%s/%s.jpg' % (author, date, image_guid)
